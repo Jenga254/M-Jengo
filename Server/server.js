@@ -6,21 +6,20 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import { check, validationResult } from "express-validator";
+import cors from "cors";
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const port = 3000;
 
-// Enable CORS for all origins (for development only)
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
+app.use(
+  cors({
+    origin: ["https://deploy-mern-frontend.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
+app;
 
 // Middleware to parse JSON and urlencoded data
 app.use(bodyParser.json());
@@ -29,10 +28,13 @@ app.use(express.static(path.join(__dirname, "../Frontend/src")));
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://127.0.0.1:27017/jobsDatabase", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://kip:Nixon1998!>@cluster0.adfsqir.mongodb.net/kip?retryWrites=true&w=majority&appName=Cluster0",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log("Connected to MongoDB");
   })
