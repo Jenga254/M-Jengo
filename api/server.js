@@ -12,15 +12,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const port = 3000;
 
 // Enable CORS for all origins (for development only)
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
+app.use(
+  cors({
+    origin: ["https://Jenga254-frontend.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 
 // Middleware to parse JSON and urlencoded data
 app.use(bodyParser.json());
