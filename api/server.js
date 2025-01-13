@@ -102,6 +102,7 @@ const Job = mongoose.model("Job", jobSchema);
 // Routes
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "views", "index.html"));
+  res.json("Hello!");
 });
 
 app.get("/job-board", (req, res) => {
