@@ -6,6 +6,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import { check, validationResult } from "express-validator";
+import cors from "cors";
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -14,7 +15,7 @@ const port = 3000;
 // Enable CORS for all origins (for development only)
 app.use(
   cors({
-    origin: ["https://m-jengo-v1ls-api.vercel.app/"],
+    origin: [""],
     methods: ["POST", "GET"],
     credentials: true,
   })
