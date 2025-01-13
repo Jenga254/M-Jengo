@@ -734,7 +734,7 @@ $("#signup-form").on("submit", function (event) {
     console.log("Data to be sent:", data);
 
     $.ajax({
-      url: "http://localhost:3000/signup-labour",
+      url: "https://m-jengo-v1ls-api.vercel.app/signup-labour",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(data),
@@ -824,7 +824,7 @@ processData: true,
 
     // AJAX request for visitor signup
     $.ajax({
-      url: "http://localhost:3000/create-job",
+      url: "https://m-jengo-v1ls-api.vercel.app/create-job",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(data3),
@@ -895,7 +895,7 @@ $("#signup-form2").on("submit", function (event) {
 
   // AJAX request for supplier signup
   $.ajax({
-    url: "http://localhost:3000/signup-suppliers",
+    url: "https://m-jengo-v1ls-api.vercel.app/signup-suppliers",
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify(data2),
