@@ -25,7 +25,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(express.static(path.join(__dirname, "../public")));
-app.use(express.static(path.join(__dirname, "../views")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Connect to MongoDB
 mongoose
@@ -103,12 +103,12 @@ const Job = mongoose.model("Job", jobSchema);
 
 // Routes
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "views", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
   res.json("Hello!");
 });
 
 app.get("/job-board", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "views", "job-board.html"));
+  res.sendFile(path.join(__dirname, "..", "public", "job-board.html"));
 });
 
 // Steel Data
