@@ -29,10 +29,13 @@ app.use(express.static(path.join(__dirname, "../views")));
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://127.0.0.1:27017/jobsDatabase", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://kip:Nixon1998!@cluster0.adfsqir.mongodb.net/jobsDatabase?retryWrites=true&w=majority&appName=Cluster0",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log("Connected to MongoDB");
   })
