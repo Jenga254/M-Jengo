@@ -14,7 +14,7 @@ const port = 3000;
 // Enable CORS for all origins (for development only)
 app.use(
   cors({
-    origin: ["https://Jenga254-frontend.vercel.app"],
+    origin: ["https://m-jengo-v1ls-api.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true,
   })
