@@ -15,7 +15,7 @@ const port = 3000;
 // Enable CORS for all origins (for development only)
 app.use(
   cors({
-    origin: ["https://m-jengo-7cq2-frontend.vercel.app/"],
+    origin: [""],
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -24,7 +24,7 @@ app.use(
 // Middleware to parse JSON and urlencoded data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "../public")));
+// app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "../views")));
 
 // Connect to MongoDB
