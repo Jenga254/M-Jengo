@@ -230,7 +230,7 @@ function filterAndFetchUsers() {
   }
 
   fetch(
-    `https://m-jengo.vercel.app/users?location=${encodeURIComponent(
+    `https://m-jengo-api.vercel.app/users?location=${encodeURIComponent(
       firstRegionSelect1
     )}`,
     {
