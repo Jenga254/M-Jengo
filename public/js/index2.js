@@ -417,7 +417,11 @@ function filterAndFetchUsers2() {
     );
     return; // Prevent fetch if no region is selected
   }
-  fetch(`/suppliers?location=${encodeURIComponent(secondRegionSelect2)}`) // Ensure the location is encoded
+  fetch(
+    `https://m-jengo-v1ls-api.vercel.app/suppliers?location=${encodeURIComponent(
+      secondRegionSelect2
+    )}`
+  ) // Ensure the location is encoded
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok: " + response.statusText);
