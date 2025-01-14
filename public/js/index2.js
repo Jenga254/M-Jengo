@@ -228,11 +228,7 @@ function filterAndFetchUsers() {
     console.error("First region select is empty. Ensure a region is selected.");
     return; // Prevent fetch if no region is selected
   }
-  fetch(
-    `https://m-jengo.vercel.app/users?location=${encodeURIComponent(
-      firstRegionSelect1
-    )}`
-  ) // Ensure the location is encoded
+  fetch(`/users?location=${encodeURIComponent(firstRegionSelect1)}`) // Ensure the location is encoded
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok: " + response.statusText);
@@ -417,11 +413,7 @@ function filterAndFetchUsers2() {
     );
     return; // Prevent fetch if no region is selected
   }
-  fetch(
-    `https://m-jengo.vercel.app/suppliers?location=${encodeURIComponent(
-      secondRegionSelect2
-    )}`
-  ) // Ensure the location is encoded
+  fetch(`/suppliers?location=${encodeURIComponent(secondRegionSelect2)}`) // Ensure the location is encoded
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok: " + response.statusText);
@@ -742,7 +734,7 @@ $("#signup-form").on("submit", function (event) {
     console.log("Data to be sent:", data);
 
     $.ajax({
-      url: "https://m-jengo.vercel.app/signup-labour",
+      url: "https://m-jengo-v1ls-api.vercel.app/signup-labour",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(data),
@@ -832,7 +824,7 @@ processData: true,
 
     // AJAX request for visitor signup
     $.ajax({
-      url: "https://m-jengo.vercel.app/create-job",
+      url: "https://m-jengo-v1ls-api.vercel.app/create-job",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(data3),
@@ -903,7 +895,7 @@ $("#signup-form2").on("submit", function (event) {
 
   // AJAX request for supplier signup
   $.ajax({
-    url: "https://m-jengo.vercel.app/signup-suppliers",
+    url: "https://m-jengo-v1ls-api.vercel.app/signup-suppliers",
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify(data2),
