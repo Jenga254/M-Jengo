@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 // Connect to MongoDB
 mongoose
   .connect(
-    "mongodb+srv://kip:Nixon1998!@cluster0.adfsqir.mongodb.net/jobsDatabase?retryWrites=true&w=majority&appName=Cluster0",
+    "mongodb+srv://kip:wHD9ONevGGr6Ba2O@cluster0.adfsqir.mongodb.net/M-JENGO?retryWrites=true&w=majority&appName=Cluster0",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
