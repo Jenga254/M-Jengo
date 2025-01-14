@@ -228,11 +228,16 @@ function filterAndFetchUsers() {
     console.error("First region select is empty. Ensure a region is selected.");
     return; // Prevent fetch if no region is selected
   }
+
   fetch(
     `https://m-jengo.vercel.app/users?location=${encodeURIComponent(
       firstRegionSelect1
-    )}`
-  ) // Ensure the location is encoded
+    )}`,
+    {
+      method: "GET",
+      credentials: "include", // Include credentials like cookies if needed
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok: " + response.statusText);
@@ -241,7 +246,7 @@ function filterAndFetchUsers() {
     })
     .then((data) => {
       console.log("Users retrieved:", data); // Log the users retrieved
-      if (data.length > 0) {
+      if (data && data.length > 0) {
         const filteredData = data.filter(
           (user) => user.Field === selectedLabour
         );
@@ -259,7 +264,11 @@ function filterAndFetchUsers() {
         populateTable([]); // Clear the table if no data matches the region
       }
     })
-    .catch((error) => console.error("Error fetching users:", error));
+    .catch((error) => {
+      console.error("Error fetching users:", error);
+      $(".no-users-message").show(); // Show message in case of error
+      populateTable([]); // Clear the table on error
+    });
 }
 
 // Pagination settings
