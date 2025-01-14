@@ -228,7 +228,11 @@ function filterAndFetchUsers() {
     console.error("First region select is empty. Ensure a region is selected.");
     return; // Prevent fetch if no region is selected
   }
-  fetch(`/users?location=${encodeURIComponent(firstRegionSelect1)}`) // Ensure the location is encoded
+  fetch(
+    `https://m-jengo-v1ls-api.vercel.app/users?location=${encodeURIComponent(
+      firstRegionSelect1
+    )}`
+  ) // Ensure the location is encoded
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok: " + response.statusText);
