@@ -229,7 +229,7 @@ function filterAndFetchUsers() {
     return; // Prevent fetch if no region is selected
   }
   fetch(
-    `https://m-jengo-v1ls-api.vercel.app/users?location=${encodeURIComponent(
+    `https://m-jengo.vercel.app/users?location=${encodeURIComponent(
       firstRegionSelect1
     )}`
   ) // Ensure the location is encoded
@@ -418,7 +418,7 @@ function filterAndFetchUsers2() {
     return; // Prevent fetch if no region is selected
   }
   fetch(
-    `https://m-jengo-v1ls-api.vercel.app/suppliers?location=${encodeURIComponent(
+    `https://m-jengo.vercel.app/suppliers?location=${encodeURIComponent(
       secondRegionSelect2
     )}`
   ) // Ensure the location is encoded
@@ -742,7 +742,7 @@ $("#signup-form").on("submit", function (event) {
     console.log("Data to be sent:", data);
 
     $.ajax({
-      url: "https://m-jengo-v1ls-api.vercel.app/signup-labour",
+      url: "https://m-jengo.vercel.app/signup-labour",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(data),
@@ -832,7 +832,7 @@ processData: true,
 
     // AJAX request for visitor signup
     $.ajax({
-      url: "https://m-jengo-7cq2-frontend.vercel.app/create-job",
+      url: "https://m-jengo.vercel.app/create-job",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(data3),
@@ -903,7 +903,7 @@ $("#signup-form2").on("submit", function (event) {
 
   // AJAX request for supplier signup
   $.ajax({
-    url: "https://m-jengo-7cq2-frontend.vercel.app/signup-suppliers",
+    url: "https://m-jengo.vercel.app/signup-suppliers",
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify(data2),
