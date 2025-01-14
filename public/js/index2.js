@@ -734,7 +734,7 @@ $("#signup-form").on("submit", function (event) {
     console.log("Data to be sent:", data);
 
     $.ajax({
-      url: "https://m-jengo-7cq2-frontend.vercel.app/signup-labour",
+      url: "https://m-jengo-v1ls-api.vercel.app/signup-labour",
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(data),
