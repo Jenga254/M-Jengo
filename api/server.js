@@ -7,6 +7,8 @@ import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import { check, validationResult } from "express-validator";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -29,13 +31,10 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // Connect to MongoDB
 mongoose
-  .connect(
-    "mongodb+srv://kip:wHD9ONevGGr6Ba2O@cluster0.adfsqir.mongodb.net/M-JENGO?retryWrites=true&w=majority&appName=Cluster0",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -304,3 +303,4 @@ app.get("/jobs", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+export default app;
