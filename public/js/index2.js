@@ -221,16 +221,19 @@ $(".regionSelect1").change(function () {
   console.log("Selected Region1: " + firstRegionSelect1);
   filterAndFetchUsers();
 });
-
 function filterAndFetchUsers() {
-  console.log("Fetching users for location: " + firstRegionSelect1); // Log the selected region
-  if (!firstRegionSelect1) {
-    console.error("First region select is empty. Ensure a region is selected.");
-    return; // Prevent fetch if no region is selected
+  console.log("Fetching users for location: " + firstRegionSelect1); // Log selected region
+
+  if (!firstRegionSelect1 || !selectedLabour) {
+    console.error("Region or Labour type not selected.");
+    return; // Prevent fetch if no region or labour type selected
   }
 
+  // Show loading message
+  $(".loading-message").show();
+
   fetch(
-    `https://m-jengo.vercel.app/users?location=${encodeURIComponent(
+    `https://m-jengo-backend.vercel.app/users?location=${encodeURIComponent(
       firstRegionSelect1
     )}`,
     {
@@ -245,28 +248,29 @@ function filterAndFetchUsers() {
       return response.json();
     })
     .then((data) => {
-      console.log("Users retrieved:", data); // Log the users retrieved
-      if (data && data.length > 0) {
-        const filteredData = data.filter(
-          (user) => user.Field === selectedLabour
-        );
-        if (filteredData.length > 0) {
-          populateTable(filteredData);
-          $(".no-users-message").hide();
-        } else {
-          console.log("No users found for the selected labour and region.");
-          $(".no-users-message").show();
-          populateTable([]); // Clear the table if no data matches the criteria
-        }
+      $(".loading-message").hide(); // Hide loading message
+
+      if (!Array.isArray(data)) {
+        throw new Error("Invalid data format received");
+      }
+
+      console.log("Users retrieved:", data);
+
+      const filteredData = data.filter((user) => user.Field === selectedLabour);
+
+      if (filteredData.length > 0) {
+        populateTable(filteredData);
+        $(".no-users-message").hide(); // Hide "no users" message
       } else {
-        console.log("No users found for the selected region.");
+        console.log("No users found for the selected labour and region.");
         $(".no-users-message").show();
-        populateTable([]); // Clear the table if no data matches the region
+        populateTable([]); // Clear table if no data matches
       }
     })
     .catch((error) => {
+      $(".loading-message").hide(); // Hide loading message on error
       console.error("Error fetching users:", error);
-      $(".no-users-message").show(); // Show message in case of error
+      $(".no-users-message").show(); // Show message on error
       populateTable([]); // Clear the table on error
     });
 }
