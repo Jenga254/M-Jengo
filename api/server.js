@@ -29,7 +29,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(express.static(path.join(__dirname, "../public")));
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Connect to MongoDB
 mongoose
@@ -103,8 +103,8 @@ const jobSchema = new mongoose.Schema(
 const Job = mongoose.model("Job", jobSchema);
 
 // Routes
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
   res.json("Hello!");
 });
 

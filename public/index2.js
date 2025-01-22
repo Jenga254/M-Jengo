@@ -7,7 +7,6 @@ var selectedRebar;
 var rebarWeight;
 var selectedLabour;
 
-
 $(".fundiHomepage").click(function (event) {
   event.preventDefault();
   $(".usefulContacts").show();
@@ -233,7 +232,7 @@ function filterAndFetchUsers() {
   $(".loading-message").show();
 
   fetch(
-    `https://m-jengo-backend-git-main-nixon-kipkorirs-projects.vercel.app/users?location=${encodeURIComponent(
+    `https://m-jengo-backend.vercel.app/users?location=${encodeURIComponent(
       firstRegionSelect1
     )}`,
     {
@@ -930,4 +929,3 @@ $("#signup-form2").on("submit", function (event) {
     },
   });
 });
-
