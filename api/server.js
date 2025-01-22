@@ -17,6 +17,7 @@ const port = 3000;
 // Enable CORS for all origins (for development only)
 app.use(
   cors({
+
     origin: [
       "https://m-jengo-7cq2-frontend-ejl1yy8wh-nixon-kipkorirs-projects.vercel.app/",
     ],
@@ -28,18 +29,23 @@ app.use(
 // Middleware to parse JSON and urlencoded data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.static(path.join(__dirname, "../public")));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI, {
+let cachedDb = null;
+
+async function connectToDatabase() {
+  if (cachedDb) return cachedDb;
+  const db = await mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
+  });
+  cachedDb = db;
+  return db;
+}
+
+connectToDatabase()
+  .then(() => console.log("Connected to MongoDB"))
   .catch((err) => {
     console.error("Failed to connect to MongoDB", err);
     process.exit(1);
@@ -103,8 +109,8 @@ const jobSchema = new mongoose.Schema(
 const Job = mongoose.model("Job", jobSchema);
 
 // Routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"));
   res.json("Hello!");
 });
 
@@ -301,8 +307,8 @@ app.get("/jobs", async (req, res) => {
   }
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+// // Start the server
+// app.listen(port, () => {
+//   console.log(`Server is running on http://localhost:${port}`);
+// });
 export default app;
