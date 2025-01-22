@@ -233,7 +233,7 @@ function filterAndFetchUsers() {
   $(".loading-message").show();
 
   fetch(
-    `https://m-jengo-backend.vercel.app/users?location=${encodeURIComponent(
+    `https://m-jengo-backend-git-main-nixon-kipkorirs-projects.vercel.app/users?location=${encodeURIComponent(
       firstRegionSelect1
     )}`,
     {
