@@ -6,33 +6,12 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcryptjs";
 import { check, validationResult } from "express-validator";
-// import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const port = process.env.PORT || 3000; // Use PORT from environment variables
-const allowedOrigins = [
-  "https://m-jengo-backend.vercel.app",
-  "http://localhost:3000",
-];
-
-// CORS middleware
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     methods: ["GET", "POST", "OPTIONS"], // Allow necessary methods
-//     credentials: true,
-//     allowedHeaders: ["Content-Type", "Authorization"], // Custom headers
-//   })
-// );
 
 // Middleware to parse JSON and urlencoded data
 app.use(bodyParser.json());
@@ -120,7 +99,6 @@ const Job = mongoose.model("Job", jobSchema);
 // Routes
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
-  res.json("Hello!");
 });
 
 app.get("/job-board", (req, res) => {
@@ -143,7 +121,6 @@ app.post("/signup-labour", async (req, res) => {
   const { Name, Field, Location, Contact } = req.body;
 
   try {
-    // Check for duplicate Contact
     const existingUser = await User.findOne({ Contact });
     if (existingUser) {
       return res
@@ -155,7 +132,6 @@ app.post("/signup-labour", async (req, res) => {
     await user.save();
     res.json({ message: "Sign up successful!" });
   } catch (err) {
-    // Handle unique constraint violations
     if (err.code === 11000 && err.keyPattern?.Contact) {
       return res
         .status(400)
@@ -185,7 +161,6 @@ app.post(
     }
 
     try {
-      // Check for duplicate Email
       const existingVisitor = await Visitor.findOne({ Email });
       if (existingVisitor) {
         return res
@@ -199,7 +174,6 @@ app.post(
 
       res.json({ message: "Visitor sign up successful!" });
     } catch (err) {
-      // Handle unique constraint violations
       if (err.code === 11000 && err.keyPattern?.Email) {
         return res
           .status(400)
@@ -217,7 +191,6 @@ app.post("/signup-suppliers", async (req, res) => {
   const { Name, Field, Location, Contact, Email } = req.body;
 
   try {
-    // Check for duplicate Contact or Email
     const existingSupplier = await Supplier.findOne({
       $or: [{ Contact }, { Email }],
     });
@@ -250,7 +223,7 @@ app.get("/suppliers", async (req, res) => {
   }
 });
 
-//Get labourers
+// Get Labourers
 app.get("/users", async (req, res) => {
   try {
     const location = req.query.location;
@@ -261,19 +234,19 @@ app.get("/users", async (req, res) => {
     const users = await User.find(query).select("-_id -__v").exec();
     console.log("Users found:", users);
 
-    res.json(users); // Send users as JSON response
+    res.json(users);
   } catch (err) {
     console.error("Error fetching users:", err);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 // Create Job
 app.post("/create-job", async (req, res) => {
   const { userId, Name, Contact, Email, Location, Trade, Description } =
     req.body;
 
   try {
-    // Create new job linked to the user
     const newJob = new Job({
       userId,
       Name,
@@ -316,8 +289,4 @@ app.get("/jobs", async (req, res) => {
   }
 });
 
-// // Start the server
-// app.listen(port, () => {
-//   console.log(`Server is running on http://localhost:${port}`);
-// });
 export default app;
