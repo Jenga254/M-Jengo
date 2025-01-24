@@ -4,7 +4,8 @@ import path from "path";
 import mongoose from "mongoose";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
+
 import { check, validationResult } from "express-validator";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -17,15 +18,16 @@ const port = 3000;
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://m-jengo-7cq2-frontend.vercel.app/"
-  ); // Allow requests from your local development server
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Specify allowed methods
+    "https://m-jengo-7cq2-frontend.vercel.app"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
-  ); // Specify allowed headers
+  );
   next();
 });
+
 
 // Enable CORS for all origins (for development only)
 // app.use(
