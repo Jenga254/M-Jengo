@@ -14,14 +14,27 @@ const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const port = 3000;
 
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://m-jengo-7cq2-frontend.vercel.app/"
+  ); // Allow requests from your local development server
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Specify allowed methods
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  ); // Specify allowed headers
+  next();
+});
+
 // Enable CORS for all origins (for development only)
-app.use(
-  cors({
-    origin: ["https://m-jengo-backend.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["https://m-jengo-backend.vercel.app"],
+//     methods: ["POST", "GET"],
+//     credentials: true,
+//   })
+// );
 
 // Middleware to parse JSON and urlencoded data
 app.use(bodyParser.json());
