@@ -6,7 +6,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcryptjs";
 import { check, validationResult } from "express-validator";
-import cors from "cors";
+// import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -19,20 +19,20 @@ const allowedOrigins = [
 ];
 
 // CORS middleware
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST", "OPTIONS"], // Allow necessary methods
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"], // Custom headers
-  })
-);
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     methods: ["GET", "POST", "OPTIONS"], // Allow necessary methods
+//     credentials: true,
+//     allowedHeaders: ["Content-Type", "Authorization"], // Custom headers
+//   })
+// );
 
 // Middleware to parse JSON and urlencoded data
 app.use(bodyParser.json());
