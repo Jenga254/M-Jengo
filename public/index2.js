@@ -232,7 +232,7 @@ function filterAndFetchUsers() {
   $(".loading-message").show();
 
   fetch(
-    `https://m-jengo-backend.vercel.app/users?location=${encodeURIComponent(
+    `https://m-jengo-backend.vercel.app/api/users?location=${encodeURIComponent(
       firstRegionSelect1
     )}`,
     {

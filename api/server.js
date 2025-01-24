@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcryptjs";
-
 import { check, validationResult } from "express-validator";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -13,30 +12,27 @@ dotenv.config();
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const port = 3000;
+const port = process.env.PORT || 3000; // Use PORT from environment variables
+const allowedOrigins = [
+  "https://m-jengo-backend.vercel.app",
+  "http://localhost:3000",
+];
 
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://m-jengo-7cq2-frontend.vercel.app"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-
-
-// Enable CORS for all origins (for development only)
-// app.use(
-//   cors({
-//     origin: ["https://m-jengo-backend.vercel.app"],
-//     methods: ["POST", "GET"],
-//     credentials: true,
-//   })
-// );
+// CORS middleware
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "OPTIONS"], // Allow necessary methods
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"], // Custom headers
+  })
+);
 
 // Middleware to parse JSON and urlencoded data
 app.use(bodyParser.json());
@@ -61,6 +57,7 @@ connectToDatabase()
   .catch((err) => {
     console.error("Failed to connect to MongoDB", err);
     process.exit(1);
+    console.log("MONGO_URI:", process.env.MONGO_URI);
   });
 
 // Define schemas and models
