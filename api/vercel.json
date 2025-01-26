@@ -5,15 +5,5 @@
       "src": "server.js",
       "use": "@vercel/node"
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "https://m-jengo-backend.vercel.app/api/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/server.js"
-    }
   ]
 }
