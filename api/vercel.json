@@ -5,5 +5,15 @@
       "src": "server.js",
       "use": "@vercel/node"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://vercel.com/nixon-kipkorirs-projects/m-jengo-backend/Aa9ymYJgaDMiJNe8vJ2esZL6k385/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/server.js"
+    }
   ]
 }
