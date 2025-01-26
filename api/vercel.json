@@ -15,6 +15,5 @@
       "source": "/(.*)",
       "destination": "/server.js"
     }
-  ],
-  "outputDirectory": "public"
+  ]
 }

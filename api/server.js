@@ -8,6 +8,15 @@ import bcrypt from "bcryptjs";
 import { check, validationResult } from "express-validator";
 import dotenv from "dotenv";
 dotenv.config();
+import cors from "cors";
+
+app.use(
+  cors({
+    origin: "https://m-jengo-7cq2-frontend.vercel.app", // Allow your frontend domain
+    credentials: true, // If you need cookies or credentials
+  })
+);
+
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
