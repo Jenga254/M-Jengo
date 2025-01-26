@@ -231,10 +231,15 @@ function filterAndFetchUsers() {
   // Show loading message
   $(".loading-message").show();
 
-  fetch(`/api/users?location=${encodeURIComponent(firstRegionSelect1)}`, {
-    method: "GET",
-    credentials: "include", // Include credentials like cookies if needed
-  })
+  fetch(
+    `https://m-jengo-backend.vercel.app/api/users?location=${encodeURIComponent(
+      firstRegionSelect1
+    )}`,
+    {
+      method: "GET",
+      credentials: "include", // Include credentials like cookies if needed
+    }
+  )
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok: " + response.statusText);
