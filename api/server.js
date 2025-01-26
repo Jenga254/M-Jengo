@@ -224,7 +224,7 @@ app.get("/suppliers", async (req, res) => {
 });
 
 // Get Labourers
-app.get("/api/users", async (req, res) => {
+app.get("/users", async (req, res) => {
   try {
     const location = req.query.location;
     console.log("Location received:", location);

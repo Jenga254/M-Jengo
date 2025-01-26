@@ -6,20 +6,13 @@
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "https://m-jengo-backend.vercel.app/api/$1",
-      "has": [
-        {
-          "type": "host",
-          "value": "m-jengo-7cq2-frontend.vercel.app"
-        }
-      ]
+      "handle": "filesystem"
     },
     {
-      "source": "/(.*)",
-      "destination": "/public/$1"
+      "src": "/(.*)",
+      "dest": "/server.js"
     }
   ],
   "outputDirectory": "public"
